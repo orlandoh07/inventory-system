@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Inventory System</title>
+    </head>
+    <body>
+        <nav>
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('add') }}">Add Product</a>
+            <span>Welcome, {{ session["user"] }}</span>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </nav>
+        {% block content %}{% endblock %}
+    </body>
+</html>
