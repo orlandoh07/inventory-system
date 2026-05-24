@@ -66,6 +66,22 @@ def delete_product(id):
     connection.commit()
     connection.close()
 
+def get_product_by_id(id):
+    connection = get_connection()
+    cursor = connection.cursor()
+    cursor.execute("SELECT * FROM products WHERE id = ?", (id,))
+    product = cursor.fetchone()
+    connection.close()
+    return product
+
+def search_products(term):
+    connection = get_connection()
+    cursor = connection.cursor()
+    cursor.execute("SELECT * FROM products WHERE name LIKE ?", ("%" + term + "%",))
+    products = cursor.fetchall()
+    connection.close()
+    return products
+
 # categories CRUD
 def add_category(name):
     connection = get_connection()
