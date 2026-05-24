@@ -22,7 +22,7 @@ def login():
             session["user"] = username
             return redirect(url_for("index"))
         else:
-            return render_template("login.html", error="Usuario o contraseña incorrectos")
+            return render_template("login.html", error="Incorrect Username or Password")
     else:
         return render_template("login.html")
     

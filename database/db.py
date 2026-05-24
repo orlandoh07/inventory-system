@@ -124,7 +124,7 @@ def get_user_by_username(username):
     connection = get_connection()
     cursor = connection.cursor()
     cursor.execute("SELECT * FROM users WHERE username = ?", (username,))
-    users = cursor.fetchall()
+    users = cursor.fetchone()
     connection.close()
     return users
 
