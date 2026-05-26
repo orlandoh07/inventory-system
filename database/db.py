@@ -45,7 +45,12 @@ def add_product(name, price, quantity, category_id):
 def get_all_products():
     connection = get_connection()
     cursor = connection.cursor()
-    cursor.execute("SELECT * FROM products")
+    cursor.execute("""
+                    SELECT products.id, products.name, products.price, 
+                        products.quantity, categories.name 
+                    FROM products 
+                    JOIN categories ON products.category_id = categories.id
+    """)
     products = cursor.fetchall()
     connection.close()
     return products
@@ -77,7 +82,13 @@ def get_product_by_id(id):
 def search_products(term):
     connection = get_connection()
     cursor = connection.cursor()
-    cursor.execute("SELECT * FROM products WHERE name LIKE ?", ("%" + term + "%",))
+    cursor.execute("""
+        SELECT products.id, products.name, products.price, 
+            products.quantity, categories.name 
+        FROM products 
+        JOIN categories ON products.category_id = categories.id
+        WHERE products.name LIKE ?
+""", ("%" + term + "%",))
     products = cursor.fetchall()
     connection.close()
     return products
